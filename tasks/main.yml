@@ -1,0 +1,10 @@
+---
+# tasks file for ansible-role-fonts
+- name: Import vars based on the distribution
+  include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+- name: Install the fonts
+  package:
+    name: "{{ fonts }}"
+    state: present
+  become: true
