@@ -1,5 +1,12 @@
 ---
 # tasks file for ansible-role-fonts
+- name: Update cache for Debian-based distros
+  apt:
+    update_cache: yes
+  when: ansible_facts['os_family'] == 'Debian'
+  changed_when: false
+  become: true
+
 - name: Import vars based on the distribution
   include_vars: "{{ ansible_facts['os_family'] }}.yml"
 
